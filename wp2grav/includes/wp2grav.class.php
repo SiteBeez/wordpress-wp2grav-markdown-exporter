@@ -188,7 +188,7 @@ class WP2Grav
         file_put_contents($filename, $content);
 
         $GLOBALS['WP2GRAV_CNT']++;
-        $cnt = 100;
+        $cnt = WP2GRAV_EXPORT_BATCH_SIZE;
         if ($GLOBALS['WP2GRAV_CNT'] > $cnt) {
             echo "<hr>generated $cnt pages";
             ?>
@@ -303,7 +303,9 @@ class WP2Grav
         // e.g. to load shortcodes
 
         // defined in inludes/theme_init.php
-        themeInit();
+        if (function_exists('themeInit')) {
+            themeInit();
+        }
     }
 
     public function processContent($content)

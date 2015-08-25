@@ -35,8 +35,14 @@ if (is_dir($converterDir)) {
         }
     }
 }
+// load configuration
+require_once 'includes/wp2grav.config.php';
 
-require_once 'includes/theme_init.php';
+// init theme
+if (file_exists('includes/theme_init.php')) {
+    require_once 'includes/theme_init.php';
+}
+
 // Support
 require_once 'includes/wp2grav-view.class.php';
 

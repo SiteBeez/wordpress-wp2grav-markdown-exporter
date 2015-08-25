@@ -265,7 +265,7 @@ class WP2GravAdmin extends WP2Grav
         // todo: CONFIG
         // export blog items
         // page id for exporting blog posts
-        $blogPageId = 4473;
+        $blogPageId = WP2GRAV_BLOG_MASTER_PAGE_ID;
 
 
         // Load qTranslate settings if available
