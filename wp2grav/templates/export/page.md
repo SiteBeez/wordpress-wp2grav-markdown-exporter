@@ -1,12 +1,12 @@
 ---
 # http://learn.getgrav.org/content/headers
 title: <?php echo $title;?><?php echo "\n"; // for some strange reason the newline after the closing tag disappears ?>
-slug: <?php echo $slug;?><?php  echo "\n"; ?>
+slug: <?php echo $slug;?><?php echo "\n"; ?>
 # menu: <?php echo $title;?><?php echo "\n"; ?>
-# date: <?php //echo get_the_date('', $post);?><?php echo "\n"; ?>
+date: <?php echo get_the_date('d-m-Y', $post->ID);?><?php echo "\n"; ?>
 published: <?php echo (get_post_status( $post->ID ) == 'published')  ? true : false; echo "\n"; ?>
-# publish_date:<?php //echo get_the_date('', $post);?><?php echo "\n"; ?>
-# unpublish_date: 05/17/2015 00:32
+publish_date: <?php echo get_the_date('d-m-Y', $post->ID);?><?php echo "\n"; ?>
+# unpublish_date: <?php echo get_the_date('d-m-Y', $post->ID);?><?php echo "\n"; ?>
 # template: false
 visible: true
 summary:

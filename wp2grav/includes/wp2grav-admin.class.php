@@ -18,6 +18,8 @@ if (!defined('ABSPATH')) {
  * @version 1.0.0
  * @author  sitebeez
  */
+
+
 class WP2GravAdmin extends WP2Grav
 {
     protected $file = null;
@@ -265,12 +267,11 @@ class WP2GravAdmin extends WP2Grav
         // todo: CONFIG
         // export blog items
         // page id for exporting blog posts
-        $blogPageId = WP2GRAV_BLOG_MASTER_PAGE_ID;
+        $blogPageId = (int)WP2GRAV_BLOG_MASTER_PAGE_ID;
 
 
         // Load qTranslate settings if available
         $qt = $this->qt_settings();
-
         if (is_array($qt)) {
             // found qtranslate_slug
             global $qtranslate_slug;
