@@ -4,24 +4,65 @@ Export your Wordpress posts, pages and more into a markdown content structure fo
 
 ## Description
 
-Ready to move to [Grav - A Modern Flat-File CMS](getgrav.org)? This plugin allows you to export your posts, pages, authors, tags and categories into a markdown file based content structure for getgrav.org
+Ready to move to [Grav - A Modern Flat-File CMS](getgrav.org)? 
 
+This plugin allows you to export your posts, pages, authors, tags and categories into a markdown file based content structure for getgrav.org
+
+The exporter creates a folder structure using the slugs of Wordpress - so you will keep your Urls!
+
+Depending on your Wordpress installation (theme, add-ons) you will need to add some custom code loaded before the export process and review & edit the generated file set.
+
+### Supported content types and meta data
+
+Currently following content types are supported
+
+- pages
+- posts
+- authors
+
+Following meta data is supported:
+
+- publish data
+- published status
+- authors
+- categories
+- tags 
+
+
+To add more content types start with the `export()` function in `/wp-content/plugins/wp2grav/includes/wp2grav-admin.class.php` to see how to add more types.
+
+
+### Images, Links
+
+Urls of images and links are not touched by the export process. So all references will be kept like they are in Wordpress and converted into markdown.
+
+**Images:** You might either move the wordpress `uploads` directory into the root of your grav installation or manually move all referenced media files into a location of your choice and use the search & replace function of your IDE change the references.
+
+**Links**: You might need to use the search & replace function of your IDE to fix the link urls in the exported content files.
+
+### Export location
 The export will be stored in 
 
 	/wp-content/uploads/wp2grav/export
 	
-using the slug structure of Wordpress - so you will keep your Urls!
 
-The multilanguage addons **qtranslate** and **qtranslate slug** are supported to export into the getgrav.org multilanguage file format keeping language specific slugs.
+### qTranslate support
 
-Depending on your Wordpress installation you will need to review and edit the generated fileset.
+The multi-language add-ons **qtranslate** and **qtranslate slug** are supported to export into the getgrav.org multi-language file format keeping language specific slugs.
 
-Consider this plugin as "good enough to do the job". 
+
+### Note
+
+Consider this plugin as "good enough to do the job", but not more ;)
 
 
 ## Installation
 
-Upload the WP2Grav plugin to your site and activate it.
+Upload the WP2Grav plugin to your site into
+
+	wp-content/plugins/
+
+and activate it through the Wordpress Administration.
 
 
 ## Configuration

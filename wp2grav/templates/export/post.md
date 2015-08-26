@@ -8,6 +8,7 @@ published: <?php echo (get_post_status( $post->ID ) == 'published')  ? true : fa
 publish_date: <?php echo get_the_date('d-m-Y', $post->ID);?><?php echo "\n"; ?>
 # unpublish_date: <?php echo get_the_date('d-m-Y', $post->ID);?><?php echo "\n"; ?>
 # template: false
+# theme: false
 visible: true
 summary:
     enabled: true

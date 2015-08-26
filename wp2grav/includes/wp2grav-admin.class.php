@@ -264,7 +264,6 @@ class WP2GravAdmin extends WP2Grav
      */
     protected function export()
     {
-        // todo: CONFIG
         // export blog items
         // page id for exporting blog posts
         $blogPageId = (int)WP2GRAV_BLOG_MASTER_PAGE_ID;
@@ -304,6 +303,7 @@ class WP2GravAdmin extends WP2Grav
         $this->processExport($contentArray, $qt, $qtranslate_slug, null, 'default');
 
 
+        // reset content tree
         wp2grav_content_tree::$arr_all_pages_id_parent = null;
         // export Blog pages
         $contentArray = wp2grav_get_pages($args, 'post');
@@ -314,6 +314,7 @@ class WP2GravAdmin extends WP2Grav
                 'subtree' => $contentArray
             )
         );
+
         //override pageFileName property
         $blogPageArray[0]['page']->pageFileName = 'blog';
 

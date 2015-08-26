@@ -105,8 +105,6 @@ class WP2Grav
         if ($post == null) {
             return false;
         }
-//        $permalink = get_permalink($post);
-
 
         if ($post->post_type == 'page') {
             // add 01. style sorting to pages
@@ -311,6 +309,11 @@ class WP2Grav
     public function processContent($content)
     {
         $content = apply_filters('the_content', $content);
+
+        // make sure all shortcodes are resolved
+        $content = do_shortcode( $content);
+        $content = do_shortcode( $content);
+        $content = do_shortcode( $content);
 
         $converter = new HtmlConverter(array(
                 'strip_tags' => true,

@@ -4,9 +4,15 @@
 ## Changelog
 
 
+### 1.0.0-1
+
+*Release Date - 26th of august, 2015*
+
+improved documentation
+
 ### 1.0.0
 
-*Release Date - 25ths of august, 2015*
+*Release Date - 25th of august, 2015*
 
 
 ## License
