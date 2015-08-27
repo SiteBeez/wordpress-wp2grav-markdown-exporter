@@ -3,6 +3,14 @@
 
 ## Changelog
 
+### 1.1.0
+
+*Release Date - 27th of august, 2015*
+
+fixed path issues
+added WP_Screen context "front"
+improved qtranslate slug generation
+
 
 ### 1.0.0-1
 

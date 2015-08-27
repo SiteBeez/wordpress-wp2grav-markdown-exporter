@@ -1,11 +1,13 @@
 <?php
 /*
+
 Plugin Name: wp2grav
 Plugin URI: https://github.com/SiteBeez/wordpress-wp2grav-markdown-exporter/tree/master/wp2grav
 Description: export your Wordpress into getgrav.org content files
 Author: Cord | SiteBeez.com
 Author URI: http://www.slogsdon.com/
-Version: 1.0.0
+Version: 1.1.0
+
 */
 
 
