@@ -1,7 +1,7 @@
 <div class="wrap" id="static-wp">
     <h2>WP2Grav</h2>
 
-    <img src="../wp-content/plugins/wp2grav/grav.png" style="float: right">
+    <img src="<?php echo WP_PLUGIN_URL; ?>/wp2grav/grav.png" style="float: right">
     <p>
         Export your Wordpress Site into getGrav.org markdown files.
 
