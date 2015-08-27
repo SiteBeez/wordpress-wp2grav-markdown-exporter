@@ -31,6 +31,9 @@ class WP2Grav
      */
     public function __construct($plugin)
     {
+        // make first plugin loaded to allow to set screen context
+        add_action( 'activated_plugin', array($this, 'load_first') );
+
         $this->plugin = $plugin;
         $this->destination = $this->resolveDestination();
         $this->initHooks();
@@ -78,7 +81,11 @@ class WP2Grav
                 foreach ($languages as $language) {
                     if ($qtranslate_slug) {
                         $slugUrl = $qtranslate_slug->get_current_url($language);
-                        $slugUrl = str_replace('?lang=' . $language, '', $slugUrl);
+
+                        $slugUrl = remove_query_arg( array('page', 'lang'), $slugUrl );
+                        $slugUrl = str_replace('?page_id=', 'ID-', $slugUrl);
+
+                        //echo "$language: " . $slugUrl . "<br>";
                         // get slug of current page
                         $slug = $this->_getLastPart($slugUrl);
                     }
@@ -311,9 +318,9 @@ class WP2Grav
         $content = apply_filters('the_content', $content);
 
         // make sure all shortcodes are resolved
-        $content = do_shortcode( $content);
-        $content = do_shortcode( $content);
-        $content = do_shortcode( $content);
+        $content = do_shortcode($content);
+        $content = do_shortcode($content);
+        $content = do_shortcode($content);
 
         $converter = new HtmlConverter(array(
                 'strip_tags' => true,
@@ -339,12 +346,25 @@ class WP2Grav
         $uploads = wp_upload_dir();
 
         if (isset($uploads['basedir'])) {
-            $dir = $uploads['basedir'] . '/' . $this->plugin . '/export';
+            $dir = $uploads['basedir'] . '/' . basename($this->plugin, '.php') . '/export';
         } else {
-            $dir = WP_CONTENT_DIR . '/uploads/' . $this->plugin . '/export';
+            $dir = WP_CONTENT_DIR . '/uploads/' . basename($this->plugin, '.php') . '/export';
         }
 
         return $dir;
+    }
+
+
+    function load_first()
+    {
+        $path = 'wp2grav/wp2grav.php';
+        if ($plugins = get_option('active_plugins')) {
+            if ($key = array_search($path, $plugins)) {
+                array_splice($plugins, $key, 1);
+                array_unshift($plugins, $path);
+                update_option('active_plugins', $plugins);
+            }
+        }
     }
 }
 

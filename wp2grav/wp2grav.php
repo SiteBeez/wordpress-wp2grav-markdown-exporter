@@ -18,15 +18,15 @@ if (!defined('ABSPATH')) {
 if (!defined('WP2GRAV_VERSION')) {
     define('WP2GRAV_VERSION', '1.0');
 }
-require_once 'vendor/html-to-markdown/src/ConfigurationAwareInterface.php';
-require_once 'vendor/html-to-markdown/src/Configuration.php';
-require_once 'vendor/html-to-markdown/src/ElementInterface.php';
-require_once 'vendor/html-to-markdown/src/Element.php';
-require_once 'vendor/html-to-markdown/src/Environment.php';
-require_once 'vendor/html-to-markdown/src/HtmlConverter.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/ConfigurationAwareInterface.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/Configuration.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/ElementInterface.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/Element.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/Environment.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/HtmlConverter.php';
 
-require_once 'vendor/html-to-markdown/src/Converter/ConverterInterface.php';
-$converterDir = ABSPATH . 'wp-content/plugins/wp2grav/vendor/html-to-markdown/src/Converter/';
+require_once WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/Converter/ConverterInterface.php';
+$converterDir = WP_PLUGIN_DIR . '/wp2grav/vendor/html-to-markdown/src/Converter/';
 if (is_dir($converterDir)) {
     foreach (scandir($converterDir) as $_converter) {
         /* Scan all files. */
@@ -36,24 +36,31 @@ if (is_dir($converterDir)) {
     }
 }
 // load configuration
-require_once 'includes/wp2grav.config.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav.config.php';
 
 // init theme
-if (file_exists('includes/theme_init.php')) {
-    require_once 'includes/theme_init.php';
+if (file_exists(WP_PLUGIN_DIR . '/wp2grav/includes/theme_init.php')) {
+    require_once WP_PLUGIN_DIR . '/wp2grav/includes/theme_init.php';
 }
 
 // Support
-require_once 'includes/wp2grav-view.class.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav-view.class.php';
 
 // Do the businesss
-require_once 'includes/wp2grav.class.php';
-require_once 'includes/wp2grav-admin.class.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav.class.php';
+require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav-admin.class.php';
 
 
-$plugin = basename(__FILE__, '.php');
+
+$plugin = 'wp2grav/' . basename(__FILE__);
 if (is_admin()) {
     new WP2GravAdmin($plugin, __FILE__);
+    if ($_POST['wp2grav-action']) {
+     // set screen context to site
+        require_once(ABSPATH . 'wp-admin/includes/screen.php');
+        $GLOBALS['current_screen'] = \WP_Screen::get('front');
+    }
 } else {
     new WP2Grav($plugin);
 }
+
