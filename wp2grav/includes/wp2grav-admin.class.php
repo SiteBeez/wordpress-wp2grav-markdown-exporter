@@ -269,6 +269,7 @@ class WP2GravAdmin extends WP2Grav
         $blogPageId = (int)WP2GRAV_BLOG_MASTER_PAGE_ID;
 
 
+
         // Load qTranslate settings if available
         $qt = $this->qt_settings();
         if (is_array($qt)) {
@@ -324,12 +325,16 @@ class WP2GravAdmin extends WP2Grav
         $this->addNotice(WP2GravView::notice('admin/export-success'). $this->destination);
 
         wp_reset_postdata();
+
+        // emulate wp_safe_redirect();
+        $location = admin_url('admin.php?page=' . $this->plugin . '-export');
+        $location = wp_sanitize_redirect($location);
+       	$location = wp_validate_redirect($location, admin_url());
         ?>
         <script type="text/javascript">
-            location.href = "<?php echo admin_url('admin.php?page=wp2grav-export'); ?>";
+            location.href = "<?php echo $location; ?>";
         </script>
         <?php
-//        wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin . '-export'));
         exit();
     }
 
@@ -359,3 +364,5 @@ class WP2GravAdmin extends WP2Grav
         }
     }
 }
+
+
