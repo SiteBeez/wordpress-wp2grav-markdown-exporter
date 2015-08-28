@@ -3,6 +3,14 @@
 
 ## Changelog
 
+### 1.2.0
+
+*Release Date - 28th of august, 2015*
+
+fixed date generation
+handle html to markdown exception for dirty html (apply htmlpurifier) 
+
+
 ### 1.1.0
 
 *Release Date - 27th of august, 2015*
