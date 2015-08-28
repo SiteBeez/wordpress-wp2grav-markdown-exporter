@@ -37,8 +37,14 @@ if (is_dir($converterDir)) {
         }
     }
 }
+
 // load configuration
 require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav.config.php';
+
+if (WP2GRAV_EXPORT_HTMLPURIFIER) {
+    require_once WP_PLUGIN_DIR . '/wp2grav/vendor/htmlpurifier/library/HTMLPurifier.auto.php';
+}
+
 
 // init theme
 if (file_exists(WP_PLUGIN_DIR . '/wp2grav/includes/theme_init.php')) {
@@ -53,12 +59,11 @@ require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav.class.php';
 require_once WP_PLUGIN_DIR . '/wp2grav/includes/wp2grav-admin.class.php';
 
 
-
 $plugin = 'wp2grav/' . basename(__FILE__);
 if (is_admin()) {
     new WP2GravAdmin($plugin, __FILE__);
     if ($_POST['wp2grav-action']) {
-     // set screen context to site
+        // set screen context to site
         require_once(ABSPATH . 'wp-admin/includes/screen.php');
         $GLOBALS['current_screen'] = \WP_Screen::get('front');
     }

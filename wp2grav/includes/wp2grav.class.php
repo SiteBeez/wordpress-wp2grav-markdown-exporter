@@ -32,7 +32,7 @@ class WP2Grav
     public function __construct($plugin)
     {
         // make first plugin loaded to allow to set screen context
-        add_action( 'activated_plugin', array($this, 'load_first') );
+        add_action('activated_plugin', array($this, 'load_first'));
 
         $this->plugin = $plugin;
         $this->destination = $this->resolveDestination();
@@ -82,7 +82,7 @@ class WP2Grav
                     if ($qtranslate_slug) {
                         $slugUrl = $qtranslate_slug->get_current_url($language);
 
-                        $slugUrl = remove_query_arg( array('page', 'lang'), $slugUrl );
+                        $slugUrl = remove_query_arg(array('page', 'lang'), $slugUrl);
                         $slugUrl = str_replace('?page_id=', 'ID-', $slugUrl);
 
                         //echo "$language: " . $slugUrl . "<br>";
@@ -322,15 +322,43 @@ class WP2Grav
         $content = do_shortcode($content);
         $content = do_shortcode($content);
 
+
+        // issue: e.g. a "</p>" tag breaks the converter
+        // try to remove these invalid content
+
         $converter = new HtmlConverter(array(
                 'strip_tags' => true,
                 'header_style' => 'atx'
             )
         );
+        try {
+
+            $content_converted = $converter->convert($content);
+
+        } catch (\InvalidArgumentException $e) {
+
+            if (WP2GRAV_EXPORT_HTMLPURIFIER) {
+
+                if (!isset($this->purifier)) {
+                    // http://htmlpurifier.org/
+                    $config = \HTMLPurifier_Config::createDefault();
+                    $this->purifier = new \HTMLPurifier($config);
+                }
+
+                $clean_content = $this->purifier->purify($content);
+                $content_converted = $converter->convert($clean_content);
+
+                echo "<hr>catched html convert exception " . $e->getMessage() . " and cleaned content<hr>";
+            } else {
+                $e->getMessage();
+                exit();
+            }
+
+
+        }
 //        $converter->setOption('italic_style', '_');
 //        $converter->setOption('bold_style', '__');
-        $content = $converter->convert($content);
-        return $content;
+        return $content_converted;
     }
 
     /**
