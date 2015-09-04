@@ -26,6 +26,20 @@ if (get_the_tags($post->ID)) {
       echo implode(',', $t);
     }
 ?>]
+<?php if ($GLOBALS['EOL_DL'][$slug]) { ?>
+download:
+    category: [<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['category']; } ?>]
+    compatiblity: [<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['compatibility']; } ?>]
+    thumbnail: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['thumbnail']; } ?>'
+    pro: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['pro']; } ?>'
+    cert: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['cert']; } ?>'
+    price: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['price']; } ?>'
+    title_en: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['title_en']; } ?>'
+    teaser_en: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['teaser_en']; } ?>'
+    title_de: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['title_de']; } ?>'
+    teaser_de: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['teaser_de']; } ?>'
+    author: '<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['author']; } ?>'
+<?php } ?>
 # added collection selector
 <?php if ($post->pageFileName == 'blog') { ?>
 content:
@@ -55,3 +69,5 @@ metadata:
 ---
 
 <?php echo $content; ?>
+
+<?php if ($GLOBALS['EOL_DL'][$slug]) { echo $GLOBALS['EOL_DL'][$slug]['changelog']; } ?>
