@@ -1,7 +1,7 @@
 === WP2Grav ===
 Contributors: SiteBeez
 Tags: static, markdown, qtranslate, qtranslate slug
-Requires at least: 4.1
+Requires at least: 3.0
 Tested up to: 4.1
 Stable tag: trunk
 License: MIT
@@ -33,6 +33,12 @@ Following meta data is supported:
 Upload the WP2Grav plugin to your site, and activate it! Yep, that's it!
 
 == Changelog ==
+
+= 1.2.0 =
+*Release Date - 7th September, 2015*
+
+
+improvements and bugfixes
 
 = 1.0.0 =
 *Release Date - 25th August, 2015*
