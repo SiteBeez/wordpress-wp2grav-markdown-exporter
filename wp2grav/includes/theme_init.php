@@ -39,6 +39,8 @@ function themeInit()
             }
 
             $data[$d->meta['code']] = array(
+                'code' => $d->meta['code'],
+                'category' => $d->category,
                 'compatibility' => implode(',', $compatibility),
                 'changelog' => $d->meta['changelog'],
                 'thumbnail' => $d->meta['thumbnail'],

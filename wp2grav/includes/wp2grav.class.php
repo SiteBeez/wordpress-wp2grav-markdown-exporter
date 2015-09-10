@@ -113,15 +113,11 @@ class WP2Grav
             return false;
         }
 
-
-
-
-
-
         if ($post->post_type == 'page') {
             // add 01. style sorting to pages
             $idx_str = str_pad($idx + 1, 2, '0', STR_PAD_LEFT);
-            $addedUri = $idx_str . '.' . $this->_getLastPart($permalink) . '/';
+            $base_slug = $this->_getLastPart($permalink);
+            $addedUri = $idx_str . '.' . $base_slug . '/';
         } else {
             // all other types
             $addedUri = $this->_getLastPart($permalink) . '/';
@@ -146,7 +142,6 @@ class WP2Grav
         if (is_file($filename)) {
             return $addedUri;
         }
-
         echo "\n\n<hr><b>generate Page $addedUri</b>\n";
         if ($language) {
             echo "\n\n<br>language: $language\n";
